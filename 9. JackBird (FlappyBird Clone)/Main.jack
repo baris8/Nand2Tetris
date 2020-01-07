@@ -1,0 +1,41 @@
+class Main{
+	
+	function void main(){
+		var Game game;
+		var char key;
+		while(~(key = 140)){
+			do Output.moveCursor(9, 28);
+			do Output.printString("JackyBird");
+			do Output.moveCursor(10, 24);
+			do Output.printString("Press 'Up' to Play");
+			do Output.moveCursor(11, 24);
+			do Output.printString("Press 'ESC' to Quit");
+		
+			while(~(key = 131)){
+				let key = Keyboard.keyPressed();
+				if(key = 140){
+					return;
+				}
+			}
+		
+			do Screen.clearScreen();
+		
+			let game = Game.new();
+			do game.run();
+			do Output.moveCursor(13, 53);
+			do Output.printString("GameOver");
+			do Output.moveCursor(15, 51);
+			do Output.printString("Press 'Space'");
+			do Output.moveCursor(16, 51);
+			do Output.printString("for Main Menu");
+			
+			let key = 0;
+			while(~(key = 32)){
+				let key = Keyboard.keyPressed();
+			}
+			
+			do Screen.clearScreen();
+		}
+		return;
+	}
+}

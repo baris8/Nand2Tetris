@@ -1,0 +1,129 @@
+function Pipe.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push constant 0
+push constant 195
+call Random.between 2
+pop this 1
+push pointer 0
+return
+function Pipe.getXPos 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Pipe.getYPosTop 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Pipe.getYPosBtm 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 60
+add
+return
+function Pipe.drawPipes 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push constant 0
+push this 0
+push constant 25
+add
+push this 1
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push this 1
+push constant 60
+add
+push this 0
+push constant 25
+add
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Pipe.erasePipes 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push constant 0
+push this 0
+push constant 25
+add
+push this 1
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push this 1
+push constant 60
+add
+push this 0
+push constant 25
+add
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Pipe.movePipes 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Pipe.erasePipes 1
+pop temp 0
+push this 0
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+push constant 1
+sub
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Pipe.drawPipes 1
+pop temp 0
+push constant 1
+call Sys.wait 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push constant 375
+pop this 0
+push constant 0
+push constant 195
+call Random.between 2
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Pipe.drawPipes 1
+pop temp 0
+push constant 1
+call Sys.wait 1
+pop temp 0
+label IF_END0
+push constant 0
+return

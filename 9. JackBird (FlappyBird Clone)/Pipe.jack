@@ -1,0 +1,52 @@
+class Pipe{
+
+	field int xPos;
+	field int gapPos;
+
+	constructor Pipe new(int x){
+		let xPos = x;
+		let gapPos = Random.between(0, 195);
+		return this;
+	}
+
+	method int getXPos(){
+		return xPos;
+	}
+	method int getYPosTop(){
+		return gapPos;
+	}
+	method int getYPosBtm(){
+		return gapPos + 60;
+	}
+	
+	method void drawPipes(){
+		do Screen.setColor(true);
+		do Screen.drawRectangle(xPos, 0, xPos + 25, gapPos);
+		do Screen.drawRectangle(xPos, gapPos + 60, xPos + 25, 255);
+		return;
+	}
+	
+	method void erasePipes(){
+		do Screen.setColor(false);
+		do Screen.drawRectangle(xPos, 0, xPos + 25, gapPos);
+		do Screen.drawRectangle(xPos, gapPos + 60, xPos + 25, 255);
+		return;
+	}
+	
+	method void movePipes(){
+		do erasePipes();
+		if(xPos > 1){
+			let xPos = xPos-1;
+			do Screen.setColor(true);
+			do drawPipes();
+			do Sys.wait(1);
+		}else{
+			let xPos = 375;
+			let gapPos = Random.between(0, 195);
+			do Screen.setColor(true);
+			do drawPipes();
+			do Sys.wait(1);
+		}
+		return;
+	}
+}

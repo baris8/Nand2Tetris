@@ -1,0 +1,112 @@
+class Game{
+	field Pipe p1;
+	field Pipe p2;
+	field Bird bird;
+	field char key;
+	field boolean running;
+	field int score;
+	
+	constructor Game new(){
+		let bird = Bird.new();
+		let p1 = Pipe.new(175);
+		let p2 = Pipe.new(375);
+		let score = 0;
+		return this;
+	}
+	
+	method void run(){
+		do Screen.drawLine(401, 0, 401, 255);
+		do Output.moveCursor(9, 55);
+		do Output.printString("Score");
+		do Output.moveCursor(11, 57);
+		do Output.printInt(score);
+		do bird.drawBird();
+		do p1.drawPipes();
+		do p2.drawPipes();
+		
+		while(key = 0){
+			let key = Keyboard.keyPressed();
+			if (key = 131) { 	
+				let running = true;
+			} 
+		}
+
+		
+		
+		while(running){
+			let key = Keyboard.keyPressed();
+			if (key = 131) { 
+				do bird.fly();
+			}   // up arrow
+			
+			do p1.movePipes();
+			do p2.movePipes();
+			do scoreIncrease();
+			do bird.gravityPull();
+			let running = ~collide();
+			do Sys.wait(5);
+		}
+		
+		return;
+	}
+	method void scoreIncrease(){
+		do Output.moveCursor(11, 57);
+		if((p1.getXPos()+25 = 80) | (p2.getXPos()+25 = 80)){
+			let score = score + 1;
+		}
+		
+		do Output.printInt(score);
+		return;
+	}
+	
+	method boolean collide(){
+		var int birdX;
+		var int birdY;
+	
+		var int p1XPosL;
+		var int p1XPosR;
+		var int p1YPosBPipe;
+		var int p1YPosTPipe;
+		
+		var int p2XPosL;
+		var int p2XPosR;
+		var int p2YPosBPipe;
+		var int p2YPosTPipe;
+		
+		let birdX = bird.getX();
+		let birdY = bird.getY();
+		
+		let p1XPosL = p1.getXPos();
+		let p1XPosR = p1.getXPos() + 25;
+		let p1YPosTPipe = p1.getYPosTop();
+		let p1YPosBPipe = p1.getYPosBtm();
+		
+		let p2XPosL = p2.getXPos();
+		let p2XPosR = p2.getXPos() + 25;
+		let p2YPosTPipe = p2.getYPosTop();
+		let p2YPosBPipe = p2.getYPosBtm();
+		
+		if(birdY = 238){
+			return true;
+		}
+		
+		if(((birdX > p1XPosL) & (birdY < p1YPosTPipe) & (birdX < p1XPosR)) | 
+			((birdX > p1XPosL) & (birdY+16 > p1YPosBPipe) & (birdX < p1XPosR))){
+			return true;
+		}
+		if(((birdX > p2XPosL) & (birdY < p2YPosTPipe) & (birdX < p2XPosR)) | 
+			((birdX > p2XPosL) & (birdY+16 > p2YPosBPipe) & (birdX < p2XPosR))){
+			return true;
+		}
+		
+		if(((birdX+16 > p1XPosL) & (birdY < p1YPosTPipe) & (birdX+16 < p1XPosR)) | 
+			((birdX+16 > p1XPosL) & (birdY+16 > p1YPosBPipe) & (birdX+16 < p1XPosR))){
+			return true;
+		}
+		if(((birdX+16 > p2XPosL) & (birdY < p2YPosTPipe) & (birdX+16 < p2XPosR)) | 
+			((birdX+16 > p2XPosL) & (birdY+16 > p2YPosBPipe) & (birdX+16 < p2XPosR))){
+			return true;
+		}
+		return false;
+	}
+}

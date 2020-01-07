@@ -1,0 +1,3 @@
+Startet man die Jar-Datei so wird man aufgefordert beliebig viele Vm-Dateien auszuwählen. Danach erscheint ein neues Fenster mit 2 Textfeldern die beschriftet sind.
+Im linken steht der Inhalt der VM-Dateien und im rechten die Übersetzung in eine ASM-Datei.
+klickt man auf den Button Save as ASM File, so wird der Text aus dem rechten Feld als ASM-Datei abgespeichert im selben Verzeichnis wo sich die JAR-Datei befindet. Man muss die erstellte Datei nochmal per Hand umbenennen damit die Tests funktionieren.
