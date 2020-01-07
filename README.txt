@@ -16,3 +16,4 @@ Folgende Liste ist eine Übersicht der Projektthemen.
 10.Compiler: Syntax Analyse und Code Erstellung
 
 Folgender Link führt zum Kurs: https://www.nand2tetris.org/
+Dort werden können ebenfalls die nötigen Programme runtergeladen werden.
